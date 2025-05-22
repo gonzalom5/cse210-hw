@@ -21,21 +21,34 @@ public class Journal
     {
         Console.WriteLine("What is the filename to load?");
         string fileName = Console.ReadLine();
-        string[] lines = System.IO.File.ReadAllLines(fileName);
 
-        foreach (string line in lines)
+        if (File.Exists(fileName))
         {
-            string[] parts = line.Split(",");
-            
-            Entry entry = new Entry
+            _entries.Clear();
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+
+            foreach (string line in lines)
             {
-                _date = parts[0],
-                _promptText = parts[1],
-                _entryText = parts[2]
-            };
-            _entries.Add(entry);
+                string[] parts = line.Split(",");
+                string date = parts[0];
+                string promptText = parts[1];
+                string entryText = parts[2];
+
+                Entry entry = new Entry
+                {
+                    _date = date,
+                    _promptText = promptText,
+                    _entryText = entryText
+                };
+                _entries.Add(entry);
+            }
+            Console.WriteLine("Journal loaded successfully!\n");
         }
-        Console.WriteLine("Journal loaded successfully!\n");
+        else
+        {
+            Console.WriteLine("File not found.\n");
+        }
+        
     }
 
     public void SaveToFile()
