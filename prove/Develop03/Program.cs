@@ -4,8 +4,8 @@ public class Program
 {
     static void Main(string[] args)
     {
-        RandomScripture library = new RandomScripture();
-        Scripture scripture = library.GetRandomScripture();
+        RandomScripture random = new RandomScripture();
+        Scripture scripture = random.GetRandomScripture();
 
         while (true)
         {
