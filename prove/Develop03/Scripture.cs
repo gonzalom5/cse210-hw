@@ -22,23 +22,26 @@ public class Scripture
     }
     public void HideRandomWords(int count = 3)
     {
-        for (int i = 0; i < count; i++)
+        int wordsHidden = 0;
+
+        while (wordsHidden < count)
         {
-            int attempts = 0;
-            bool wordHidden = false;
-
-            while (!wordHidden && attempts < 100)
+            List<Word> shownWords = new List<Word>();
+            foreach (Word word in _words)
             {
-                int index = _random.Next(_words.Count);
-                Word selectedWord = _words[index];
-
-                if (!selectedWord.IsHidden())
+                if (!word.IsHidden())
                 {
-                    selectedWord.Hide();
-                    wordHidden = true;
+                    shownWords.Add(word);
                 }
-                attempts++;
             }
+            if (shownWords.Count == 0)
+            {
+                break;
+            }
+            int randomIndex = _random.Next(shownWords.Count);
+            Word selectedWord = shownWords[randomIndex];
+            selectedWord.Hide();
+            wordsHidden++;
         }
     }
     public bool IsCompletelyHidden()
@@ -63,6 +66,5 @@ public class Scripture
         }
         return result.Trim();
     }
-
 }
 
