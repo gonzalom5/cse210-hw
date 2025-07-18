@@ -1,16 +1,17 @@
 using System;
+using System.Runtime.CompilerServices;
+using System.Threading;
 
 class Program
 {
     static void Main(string[] args)
     {
-        GoalManager manager = new();
+        GoalManager manager = new GoalManager();
         bool running = true;
 
         while (running)
         {
-            Console.Clear();
-            Console.WriteLine("You have {} points.");
+            Console.WriteLine($"\nYou have {manager.GetTotalScore()} points.");
             Console.WriteLine("");
             Console.WriteLine("Menu Options:");
             Console.WriteLine("  1. Create New Goal");
@@ -25,49 +26,28 @@ class Program
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("The types of Goals are:");
-                    Console.WriteLine("  1. Simple Goal");
-                    Console.WriteLine("  2. Eternal Goal");
-                    Console.WriteLine("  3. Checklist Goal");
-                    Console.WriteLine("Which type of goal would you like to create? ");
-                    string goalType = Console.ReadLine();
-
-                    if (goalType == "1")
-                    {
-                        Console.Write("What is the name of your goal? ");
-                        string name = Console.ReadLine();
-                        Console.Write("What is A short description of it? ");
-                        string description = Console.ReadLine();
-                        Console.Write("What is the amount of points associated with this goal? ");
-                        int points = int.Parse(Console.ReadLine());
-
-                        SimpleGoal
-                    }
-
+                    manager.CreateGoal();
                     break;
                 case "2":
-                    Console.WriteLine("The goals are:");
-
+                    manager.DisplayGoals();
                     break;
                 case "3":
-
+                    manager.SaveGoals();
                     break;
                 case "4":
-
+                    manager.LoadGoals();
                     break;
                 case "5":
-
+                    manager.RecordEvent();
                     break;
                 case "6":
-                    Console.WriteLine("\n Goodbye!");
-                    return;
+                    running = false;
+                    break;
                 default:
                     Console.WriteLine("\nInvalid choice. Please try again.");
                     Thread.Sleep(2000);
                     continue;
             }
-            
-
         }
     }
 }

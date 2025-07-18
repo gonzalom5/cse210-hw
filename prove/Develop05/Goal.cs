@@ -1,3 +1,4 @@
+using System;
 public abstract class Goal
 {
     protected string _name;
@@ -9,5 +10,13 @@ public abstract class Goal
         _name = name;
         _description = description;
         _points = points;
+    }
+    public abstract int RecordEvent();
+    public abstract bool IsComplete();
+    public abstract string GetStatus();
+    public abstract string GetStringRepresentation();
+    public string GetName()
+    {
+        return _name;
     }
 }
